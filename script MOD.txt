@@ -1,0 +1,69 @@
+
+
+chance       = 95
+basebet      = balance/750000
+nextbet      = basebet
+bethigh      = true
+losecount    = 0
+counter      = 0
+profittarget = 1000.00000000
+resetstats()
+resetseed()
+
+
+function dobet()
+
+    if (balance) >= profittarget then
+    
+    print("")
+    print(profit)
+    print(profittarget)
+    print(balance)
+    print("Target is reached!!!")
+    print("")
+end
+    
+    counter+=1
+    if counter >= 5 then
+        resetseed()
+        counter = 0
+    end
+    
+    if balance < 100 then
+    print("")
+    print("Security Stop")
+    
+end
+
+if (win) then
+   chance    = 95
+   nextbet   = balance/750000
+   losecount = 0
+end
+if (!win) then
+   losecount += 1
+   if (losecount > 1) then
+       nextbet = previousbet*1.36
+       chance  = (1/(((nextbet+(nextbet-basebet))/previousbet)))*20
+       if chance < 22.60 then
+           chance = 22.60 end
+   bethigh = !bethigh
+      print ("LOSE")
+   print(nextbet)
+   print(chance)
+   print(profit)
+   print(bets)
+   else
+   nextbet = previousbet*1.12
+   chance  = (1/(((basebet+nextbet))/nextbet))*25
+   if chance<22.40 then
+       chance = 22.40 end
+   bethigh = !bethigh
+   print ("LOSE")
+   print(nextbet)
+   print(chance)
+   print(profit)
+   print(bets)
+ end
+ end
+end
